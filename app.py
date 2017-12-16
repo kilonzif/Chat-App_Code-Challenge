@@ -188,6 +188,7 @@ def send_message():
     model.db.session.commit()
     response = flask.jsonify({'status' : 'OK',
                               'timestamp': timestamp,
+                              'msg_type': message_type.message_type,
                               'msg' : message['message_content']})
     return response
 
@@ -204,7 +205,7 @@ def fetch_messages():
         {'status': <status>, 'msg': <msg>}"""
 
     fetch = json.loads(flask.request.data)
-    
+
     # Only return messages if user logged in.
     if not flask.request.cookies.get('session_id'):
         return bad_request()

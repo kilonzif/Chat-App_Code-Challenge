@@ -24,22 +24,30 @@ def make_conversation_id(user1, user2):
 def is_image(link):
     """Takes in a link as message content, returns True if the file type is an image."""
 
-    link_content = urllib2.urlopen(link)
-    message_content = magic.from_buffer(link_content.read())
-    for format in IMAGE_FORMATS:
-        if format in message_content:
-            return True
+    try:
+        link_content = urllib2.urlopen(link)
+        message_content = magic.from_buffer(link_content.read())
+        for format in IMAGE_FORMATS:
+            if format in message_content:
+                return True
 
-    return False
+        return False
+
+    except:
+        return False
 
 
 def is_video(link):
     """Takes in a link as message content, returns True if the file type is a video."""
 
-    link_content = urllib2.urlopen(link)
-    message_content = magic.from_buffer(link_content.read())
-    for format in VIDEO_FORMATS:
-        if format in message_content:
-            return True
+    try: 
+        link_content = urllib2.urlopen(link)
+        message_content = magic.from_buffer(link_content.read())
+        for format in VIDEO_FORMATS:
+            if format in message_content:
+                return True
 
-    return False
+        return False
+
+    except:
+        return False
