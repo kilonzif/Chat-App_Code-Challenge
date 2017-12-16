@@ -1,0 +1,8 @@
+flask
+flask_sqlalchemy==2.1
+bcrypt
+uuid
+datetime
+flask_debugtoolbar
+psycopg2
+
