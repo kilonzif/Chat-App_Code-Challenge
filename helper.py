@@ -1,5 +1,8 @@
 """HELPER FUNCTIONS FOR APP"""
 
+import urllib2
+import magic
+
 # Most common video / image file formats
 VIDEO_FORMATS = ['AVI', 'FLV', 'WMV', 'MOV', 'MP4']
 IMAGE_FORMATS = ['JPEG', 'JPG', 'JFIF', 'Exif', 'TIFF', 'GIF', 'BMP', 'PNG', 'PPM', 'PGM', 'PBM', 'PNM']
@@ -21,7 +24,7 @@ def make_conversation_id(user1, user2):
 def is_image(link):
     """Takes in a link as message content, returns True if the file type is an image."""
 
-    link_content = urllib.urlopen(link)
+    link_content = urllib2.urlopen(link)
     message_content = magic.from_buffer(link_content.read())
     for format in IMAGE_FORMATS:
         if format in message_content:
@@ -33,7 +36,7 @@ def is_image(link):
 def is_video(link):
     """Takes in a link as message content, returns True if the file type is a video."""
 
-    link_content = urllib.urlopen(link)
+    link_content = urllib2.urlopen(link)
     message_content = magic.from_buffer(link_content.read())
     for format in VIDEO_FORMATS:
         if format in message_content:

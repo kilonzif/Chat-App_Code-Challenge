@@ -5,4 +5,4 @@ uuid
 datetime
 flask_debugtoolbar
 psycopg2
-
+python-magic
