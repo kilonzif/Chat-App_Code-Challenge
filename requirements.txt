@@ -1,8 +1,9 @@
 flask
-flask_sqlalchemy==2.1
+flask_sqlalchemy
 bcrypt
 uuid
 datetime
 flask_debugtoolbar
 psycopg2
 python-magic
+jsonpickle

@@ -12,16 +12,26 @@ class User(db.Model):
     username = db.Column(db.String(60), nullable=False, unique=True)
     credentials = db.Column(db.String(60), nullable=False)
 
-    # Define relationship to messages.
-    messages = db.relationship('Message', backref=db.backref('user'))
-
-    # Define relationship to session.
-    session = db.relationship('Session', backref=db.backref('user'))
-
     def __repr__(self):
         """Readable info about the user."""
 
         return "<User username={}>".format(self.username)
+
+
+# class MessageUser(db.Model):
+#     """Association of users to messages."""
+
+#     __tablename__ = 'message_users'
+
+#     thread_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+#     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
+#     message_id = db.Column(db.Integer, db.ForeignKey('messages.message_id'), nullable=False)
+
+#     def __repr__(self):
+#         """Readable info about the message user."""
+
+#         return "<MessageUser user_id={} message_id={}>".format(self.user_id,
+#                                                                self.message_id)
 
 
 class MessageType(db.Model):
@@ -46,10 +56,17 @@ class Message(db.Model):
     message_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     conversation_id = db.Column(db.String(255), index=True, nullable=False)
     sender_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
-    message_type = db.Column(db.Integer, db.ForeignKey('message_types.message_type_id'), nullable=True)
-    message_content = db.Column(db.Text, nullable=True)
-    timestamp = db.Column(db.DateTime, nullable=True)
-    message_metadata = db.Column(db.JSON, nullable=True)
+    recipient_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
+    message_type = db.Column(db.Integer, db.ForeignKey('message_types.message_type_id'), nullable=False)
+    message_content = db.Column(db.Text, nullable=False)
+    timestamp = db.Column(db.DateTime, nullable=False)
+    message_metadata = db.Column(db.JSON, nullable=False)
+
+    sender = db.relationship("User", foreign_keys="[Message.sender_id]")
+    recipient = db.relationship("User", foreign_keys="[Message.recipient_id]")
+
+    # Define relationship to users.
+    # users = db.relationship('User', secondary='message_users', backref=db.backref('message'))
 
     def __repr__(self):
         """Readable info about the message."""
