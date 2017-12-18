@@ -18,22 +18,6 @@ class User(db.Model):
         return "<User username={}>".format(self.username)
 
 
-# class MessageUser(db.Model):
-#     """Association of users to messages."""
-
-#     __tablename__ = 'message_users'
-
-#     thread_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-#     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
-#     message_id = db.Column(db.Integer, db.ForeignKey('messages.message_id'), nullable=False)
-
-#     def __repr__(self):
-#         """Readable info about the message user."""
-
-#         return "<MessageUser user_id={} message_id={}>".format(self.user_id,
-#                                                                self.message_id)
-
-
 class MessageType(db.Model):
     """Message type model."""
 
@@ -65,9 +49,6 @@ class Message(db.Model):
     sender = db.relationship("User", foreign_keys="[Message.sender_id]")
     recipient = db.relationship("User", foreign_keys="[Message.recipient_id]")
 
-    # Define relationship to users.
-    # users = db.relationship('User', secondary='message_users', backref=db.backref('message'))
-
     def __repr__(self):
         """Readable info about the message."""
 
@@ -86,7 +67,6 @@ class Session(db.Model):
         """Readable info about the session."""
 
         return "<Session user={} id={}>".format(self.user_id, self.session_id)
-
 
 
 ##############################################################################
