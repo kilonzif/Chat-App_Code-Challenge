@@ -10,14 +10,14 @@ This application currently supports 5 endpoints for a chat app:
 
 -----<SETUP>-----
 
-1. unzip proj.zip
-2. cd proj
+1. unzip backend-python.zip
+2. cd backend-python
 3. docker build -t challenge .
 4. docker run -d -p 9000:5000 challenge
 
 -----<INSTRUCTIONS>-----
 
-This app has an authentication framework. In order to test its functionality, the following steps should be completed in sequence. CURL requests are provided to simulate behavior for both a logged in user and a logged out user. Request parameters may be substituted but are provided for your use.
+This app has an authentication framework. In order to test its functionality, the following steps should be completed in sequence. CURL requests are provided to simulate behavior for both a logged in and a logged out user. Request parameters may be substituted but are provided for your use.
 
 1. Create user
 
